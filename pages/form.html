@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Double Submit Cookies Pattern</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: white;
+        }
+
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    </style>
+</head>
+<body class="text-center" onload="getTokenAndInject()">
+<form class="form-signin" id="contentForm" method="post" action="/posts">
+
+    <div class="form-group">
+        <label for="inputContent">Content</label>
+        <textarea class="form-control" id="inputContent" name="inputContent" rows="3"></textarea>
+    </div>
+    <div class="alert alert-danger" role="alert" id="errorMessage">
+        Invalid CSRF Token !!
+    </div>
+    <button class="btn btn-success" type="submit">Submit</button>
+    <button class="btn btn-warning" onclick="signOut()" type="button">Sign Out</button>
+</form>
+</body>
+</html>
+
+<script>
+    function getTokenAndInject() {
+        $("#errorMessage").hide();
+        const CSRF_TOKEN = Cookies.get('csrf-token');
+        $("#contentForm").append(
+            `<input type="text" hidden name="inputToken" id="inputToken" value=${CSRF_TOKEN} />`
+        )
+    }
+
+    function signOut() {
+        if (confirm("Are you sure to Sign Out ?")) {
+            $("#contentForm").attr("action", "/logout");
+            $("#contentForm").submit();
+        }
+    }
+</script>

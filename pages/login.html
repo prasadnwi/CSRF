@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Double Submit Cookies Pattern</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: white;
+        }
+
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+            background-color: white;
+        }
+
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+            background-color: white;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -3px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+</head>
+<body class="text-center">
+<form class="form-signin" action="/home" method="post">
+
+    <label for="inputUsername" class="sr-only">
+        Username
+    </label>
+    <input type="text" id="inputUsername" name="inputUsername" class="form-control"
+           placeholder="Enter user name" required autofocus
+    >
+
+    <label for="inputPassword" class="sr-only">
+        Password
+    </label>
+    <input type="password" id="inputPassword" name="inputPassword" class="form-control"
+           placeholder="Enter password" required
+    >
+
+    <button class="btn btn-success" type="submit">
+        Sign in
+    </button>
+
+    <div class="checkbox mb-1">
+        <label> Username : admin </label>
+    </div>
+    <div class="checkbox mb-1">
+        <label> Password : root  </label>
+    </div>
+</form>
+</body>
+</html>
+
+<script>
+
+</script>
